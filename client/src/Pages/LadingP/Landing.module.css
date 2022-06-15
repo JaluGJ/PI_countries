@@ -1,0 +1,28 @@
+.conteiner {
+    background: url(../../Images/Fondo.jpg) ;
+    background-size: cover;
+    display: flex;
+    align-items:flex-start ;
+    justify-content: flex-start;
+    flex-direction: column;
+    height:100vh;
+}
+.conteiner div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.btn{
+    display: block;
+}
+.title{
+    font-size: 3rem;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    padding: 2rem ;
+    margin: 5rem 1rem;
+    box-sizing: border-box;
+    border: 2px rgb(125, 125, 148) solid;
+    border-radius: 15px ;
+
+}
