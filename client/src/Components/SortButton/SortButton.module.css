@@ -1,0 +1,23 @@
+.desact{
+    background-color: aqua;
+}
+.container {  display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    justify-content: center;
+    align-content: stretch;
+    justify-items: center;
+    align-items: center;
+    grid-template-areas:
+      "a b c";
+  }
+  
+  .a { grid-area: a; }
+  
+  .b { grid-area: b; }
+  
+  .c { grid-area: c; }
+  
+  

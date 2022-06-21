@@ -4,7 +4,9 @@ const { Country, Activity } = require('../db.js')
 const router = Router();
 
 async function conection() {
-  return await Country.findAll()
+  return await Country.findAll({
+    include: Activity
+  })
 }
 /*console.log(info) =>
 [...

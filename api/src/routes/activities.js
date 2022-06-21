@@ -28,26 +28,28 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const { pais, name, dificulty, duration, season } = req.body
-    //if (!id||!name||!dificulty||!duration||!season) {
+    const { countries, name, difficulty, duration, season } = req.body
+    //if (!id||!name||!difficulty||!duration||!season) {
     //    return res.status(400).json({msg: 'Some data is not found'})
-    if (!pais) return res.status(400).json({ msg: 'falta el pais' })
+    if (!countries) return res.status(400).json({ msg: 'falta el pais' })
     if (!name) return res.status(400).json({ msg: 'falta el name' })
-    if (!dificulty) return res.status(400).json({ msg: 'falta el dificulty' })
+    if (!difficulty) return res.status(400).json({ msg: 'falta el difficulty' })
     if (!duration) return res.status(400).json({ msg: 'falta el duration' })
     if (!season) return res.status(400).json({ msg: 'falta el season' })
     try {
-        const paises = await Country.findAll({ where: { name: pais } })
+        //mapear todos los paises...lo pasíses podrían venir por un array, para poder guardar varios paises 
+        //desde mi front. Porque sino, c'omo vinculo esos varios paises. 
+        const paises = await Country.findAll({ where: { name: countries } })
         const actividades = await Activity.create({
             name: name,
-            dificulty: dificulty,
+            difficulty: difficulty,
             duration: duration,
             season: season,
         })
 
         actividades.addCountries(paises)
 
-        res.status(200).json(actividades)
+        return res.status(200).json(actividades)
     } catch (error) {
         console.log(error)
         return res.status(400).send(error)

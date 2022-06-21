@@ -4,15 +4,17 @@ import { Route } from 'react-router-dom';
 import Landing from './Pages/LadingP/Landing';
 // import NavBar from './Pages/NavBar/NavBar';
 import Home from './Pages/Home/Home';
-//import Country from '/Components/'
+import CountryDetail from './Pages/CountryDetail/CountryDetail';
+import CreateActivity from './Pages/CreateActivity/CreateActivity';
 
 function App() {
   return (
     <>
       <Route exact path='/' component={Landing} />
-      <Route path='/home' component={Home} />
-      {/* <Route path='/country' component = {Country}/> */}
-    </>
+      <Route exact path='/home' component={Home} />
+      <Route exact path='/create' component = {CreateActivity}/>
+      <Route exact path='/country/:id' component = {CountryDetail}/>
+     </>
   );
 }
 

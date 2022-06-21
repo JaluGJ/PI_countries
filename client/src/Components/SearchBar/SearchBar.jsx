@@ -1,23 +1,26 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { countriesName } from '../../Functions/ApiCall'
+/* import { countriesName } from '../../Functions/ApiCall' */
+import { getCountriesByName, setCurrentPage } from '../../Redux/actions'
 
 export default function SearchBar() {
-    const [name, setName] = useState('')
+    let [nombre, setName] = useState('')
 
     const dispatch = useDispatch()
-
+    
     const handleSubmit = (event) => {
         event.preventDefault()
-        dispatch(countriesName(name))
+        dispatch(getCountriesByName(nombre))
+        dispatch(setCurrentPage(1))
         setName('')
-        setName(name = event)
     }
 
+    
+    
     return (
         <>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <input type='text' value={name} onChange={(e) => setName(e.target.value)} placeholder='Search a Country' />
+                <input type='text' value={nombre} onChange={(e) => setName(e.target.value)} placeholder='Search a Country' />
                 <button type='submit'>Search</button>
             </form>
         </>

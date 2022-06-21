@@ -51,4 +51,4 @@ export async function activitiesCreate (data){
 }
 
 //-----update  (por si queda tiempo)------
-//-----deletes (por si queda tiempo)------
+//-----delete (por si queda tiempo)------

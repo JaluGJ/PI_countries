@@ -1,7 +1,6 @@
 import React from "react";
 import style from './Landing.module.css'
 import { Link } from "react-router-dom";
-//import fondo from '../../Images/Fondo.jpg'
 
 export default function Landing() {
     return (
@@ -9,7 +8,10 @@ export default function Landing() {
             <div>
             <span className={style.title}>Viajemos por el mundo</span>
             <Link to={`/home`}>
-                <button className={style.btn}>Let's travel</button>
+                <button className={style.btn} type='button'>
+                    <div>Let's travel</div>
+                       <i className={style.btni}></i>
+                    </button>
             </Link>
             </div>
         </div>
