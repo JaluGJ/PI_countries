@@ -2,13 +2,20 @@ import axios from "axios"
 
 const {REACT_APP_BACK_API} = process.env
 //----pedidos del get----
-export async function generalCountries (){
+/* export async function generalCountries (){
     try {
         const cntr = await  axios.get(`${REACT_APP_BACK_API}/countries`) 
         return cntr.data
     } catch (error) {
         throw error
     } 
+} */
+
+export function generalCountries(){
+    const countries = axios.get(`${REACT_APP_BACK_API}/countries`)
+    .then(res => res.data)
+    .catch(err=> console.log(err))
+    return countries
 }
 
 export async function countriesName (name){

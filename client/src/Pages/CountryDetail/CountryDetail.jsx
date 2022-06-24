@@ -9,7 +9,6 @@ export default function CountryDetail(props) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-       /*  console.log('useEffect', id) */
         dispatch(getCountryDetail(id))
         return () => {
         dispatch(clearDetail())
@@ -17,7 +16,6 @@ export default function CountryDetail(props) {
     }, [id])
     
     
-    console.log('CountryDetail', id)
 
   return (
     <>

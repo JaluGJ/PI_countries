@@ -3,7 +3,6 @@ export const filterByContinent = (allCountries, continent) => {
     return filtrau
 }
 export function filterByActivity (allCountries, activity){
-    //console.log()
     let filtrao = allCountries.filter(p=>{
         let filter = p.activities.filter( (ac) => ac.name.includes(activity) )
         if(filter && filter.length > 0){

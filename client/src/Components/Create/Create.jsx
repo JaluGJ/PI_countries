@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { activitiesCreate } from '../../Functions/ApiCall'
 import dataValidator from '../../Functions/Validations'
 import { getAllCountries } from '../../Redux/actions'
+import Selectcountries from './SelectCountries/SelectCountries.jsx'
+import s from './Create.module.css'
+import imagen from '../../icons/home.png'
 
 
 export default function Create() {
@@ -12,7 +15,6 @@ export default function Create() {
     const { allCountries } = useSelector(state => state)
 
     const dispatch = useDispatch()
-    let history = useHistory()
 
     const [inputs, setInputs] = useState({})
     const [error, setError] = useState({})
@@ -48,9 +50,9 @@ export default function Create() {
         setInputs({
             ...inputs,
             name: '',
-            difficulty:'',
-            season:'',
-            duration:'',
+            difficulty: '',
+            season: '',
+            duration: '',
         })
         setCountriesSelected([])
         setCreateButton(true)
@@ -62,11 +64,11 @@ export default function Create() {
             ...inputs,
             [e.target.name]: e.target.value
         })
-        const validador =dataValidator({
+        const validador = dataValidator({
             ...inputs,
             [e.target.name]: e.target.value
         }, countriesSelected)
-        
+
         setError(validador)
         if (!Object.keys(validador).length) {
             setCreateButton(false)
@@ -75,48 +77,27 @@ export default function Create() {
             setCreateButton(true)
         }
     }
-    
-    const addHandler = (ev) => {
-        ev.preventDefault()
-        let buscador = listCountries.find(r => r.name === country)
-        if (buscador) {
-            setCountriesSelected([...countriesSelected, country])
-            setListCountries(listCountries.filter(r => r.name !== country))
-
-            setError({
-                ...error,
-                country: false
-            })
-        }
-        else {
-            setError({
-                ...error,
-                country: true
-            })
-        }
-        setCountry('')
-    }
 
 
     const difficulty = ['Nigthmare', 'Expert', 'Hard', 'Normal', 'Easy']
     const season = ['Spring', 'Summer', 'Winter', 'Autum/Fall']
     return (
 
-        <div>
+        <div className={s.bigdada}>
             <Link to='/home'>
-                <button>volver</button>
+                <img className={s.home} src={imagen} alt="home" key='butoncito' />
             </Link>
-            <form onSubmit={e => handleSubmit(e)} onChange={e => handleChange(e)}>
+            <form className={s.container} onSubmit={e => handleSubmit(e)} onChange={e => handleChange(e)}>
                 {/*----------------------------------name------------------------------------------- */}
-                <div>
-                    <label>Name of the activity</label>
-                    <input name='name' type='text' placeholder='Activity Name' value={inputs.name}/>
-                    {error.name && <p>{error.name}</p>}
+                <div className={s.activitiName}>
+                    <h2>Name of the activity</h2>
+                    <input className={s.input} name='name' type='text' placeholder='Activity Name' value={inputs.name} />
+                    {error.name && <p className={s.error}>{error.name}</p>}
                 </div>
                 {/*----------------------------------difficulty------------------------------------------- */}
-                <div>
-                    <label>Set a difficulty</label>
-                    <select name="difficulty" id="difficulty"  value={inputs.difficulty}>
+                <div className={s.difficulty}>
+                    <h2>Set a difficulty</h2>
+                    <select className={s.input} name="difficulty" id="difficulty" value={inputs.difficulty}>
                         <option hidden>Select difficulty</option>
                         {difficulty?.map(r => {
                             return (
@@ -124,12 +105,12 @@ export default function Create() {
                             )
                         })}
                     </select>
-                    {error.difficulty && <p>{error.difficulty}</p>}
+                    {error.difficulty && <p className={s.error}>{error.difficulty}</p>}
                 </div>
                 {/*----------------------------------season------------------------------------------- */}
-                <div>
-                    <label> Set the starting season</label>
-                    <select name="season" id="seasons"  value={inputs.season}>
+                <div className={s.season}>
+                    <h2> Set the starting season</h2>
+                    <select className={s.input} name="season" id="seasons" value={inputs.season}>
                         <option hidden>Choose a season</option>
                         {season.map(r => {
                             return (
@@ -137,46 +118,35 @@ export default function Create() {
                             )
                         })}
                     </select>
+                    {error.season && <p className={s.error}>{error.season}</p>}
                 </div>
-                {error.season && <p>{error.season}</p>}
                 {/*-----------------------------------countries------------------------------------------ */}
-                <div>
-                    <label> Chose your countries</label>
-                    <input
-                        placeholder='Search a country'
-                        type='search' name='countries'
-                        list='listaDePaises'
-                        value={country}
-                        onChange={e => setCountry(e.target.value)}
+                <div className={s.countries}>
+                    <p> Chose your countries</p>
+                    <Selectcountries
+                        setCountry={setCountry}
+                        listCountries={listCountries}
+                        country={country}
+                        setCountriesSelected={setCountriesSelected}
+                        setListCountries={setListCountries}
+                        setError={setError}
+                        error={error}
+                        countriesSelected={countriesSelected}
+                        allCountries={allCountries}
+                        key='countries'
                     />
-                    <datalist id='listaDePaises' >
-                        {listCountries?.map(c => {
-                            return (
-                                <option value={c.name}>{c.name}</option>
-                            )
-                        })}
-                    </datalist>
-                    <button name='countries' onClick={(ev) => addHandler(ev)}>Add</button>
-                    {/* -------------------Display de error----------- */}
-                    {error.countries && <p>{error.countries}</p>}
-                    {/* -----------Display de countries------------------- */}
-                    <div>
-                        {countriesSelected.map(r => {
-                            return (
-                                <p>{r}</p>
-                            )
-                        })}
-                    </div>
+
                 </div>
+
                 {/*----------------------------------------duration------------------------------------- */}
-                <div>
-                    <label>Set a duration in days</label>
-                    <input name='duration' type='number' min="1" step='1' placeholder='A integer number of days'  value={inputs.duration}/>
+                <div className={s.duration}>
+                    <h2>Set a duration in days</h2>
+                    <input className={s.input} name='duration' type='number' min="1" step='1' placeholder='A integer number of days' value={inputs.duration} />
+                    {error.duration && <p className={s.error}>{error.duration}</p>}
                 </div>
-                {error.duration && <p>{error.duration}</p>}
                 {/*----------------------------------------------------------------------------- */}
 
-                <button type='submit' name='create' disabled={createButton}>Crear</button>
+                <button className={s.button} type='submit' name='create' disabled={createButton}>Crear</button>
 
             </form>
         </div>

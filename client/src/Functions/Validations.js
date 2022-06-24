@@ -10,7 +10,6 @@ export default function dataValidator (input, pushCountries) {
     if (!input.duration) {
       error.duration = "Duration is required";
     } else if (!/^\d+$/gm.test(input.duration)) {
-        /* console.log('input duration',typeof input.duration) */
       error.duration = "Duration is invalid";
     }
   
@@ -25,7 +24,7 @@ export default function dataValidator (input, pushCountries) {
     }
   
     if (!input.difficulty) {
-      error.difficulty = "difficulty is required";
+      error.difficulty = "Difficulty is required";
     }
   
     return error;

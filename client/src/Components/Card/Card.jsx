@@ -6,10 +6,10 @@ export default function Card ({id, img, name, continent}){
     return (
             <div className={style.card} id={id}>
                 <img className={style.cardImg} src={img} alt={`${name}'s flag`}/>
-                <h3>{name}</h3>
-                <p>{continent}</p>
+                <p className={style.cname}>{name}</p>
+                <p className={style.contname}>{continent}</p>
                 <Link to= {`/country/${id}`}>
-                    <span>Detalle</span>
+                    <button className={style.cardbtn}>More about</button>
                 </Link>
             </div>
     )
