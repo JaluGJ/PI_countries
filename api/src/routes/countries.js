@@ -8,46 +8,12 @@ async function conection() {
     include: Activity
   })
 }
-/*console.log(info) =>
-[...
-    country {
-    dataValues: {
-      id: 'IND',
-      name: 'India',
-      flag: 'https://flagcdn.com/w320/in.png',
-      continent: 'Asia',
-      capital: 'New Delhi',
-      subregion: 'Southern Asia',
-      area: 3287590,
-      population: 1380004385
-    },
-    _previousDataValues: {
-      id: 'IND',
-      name: 'India',
-      flag: 'https://flagcdn.com/w320/in.png',
-      continent: 'Asia',
-      capital: 'New Delhi',
-      subregion: 'Southern Asia',
-      area: 3287590,
-      population: 1380004385
-    },
-    uniqno: 1,
-    _changed: Set(0) {},
-    _options: {
-      isNewRecord: false,
-      _schema: null,
-      _schemaDelimiter: '',
-      raw: true,
-      attributes: [Array]
-    },
-    isNewRecord: false
-  }
-  ...]*/
+
 router.get('/', async (req, res) => {
   const { name } = req.query
   const info = await conection()
   const mejorcito = info.map(e => e.dataValues)
-  //console.log(mejorcito)
+  
   if (!name) {
     try {
       return res.status(200).json(mejorcito)
