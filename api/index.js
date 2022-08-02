@@ -21,6 +21,7 @@ const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const axios = require('axios');
 const { Country } = require('./src/db.js');
+const { PORT } = process.env;
 
 const hereWeGo = async () => {
   try {
@@ -46,16 +47,16 @@ const hereWeGo = async () => {
         cap = paises.capital[0]
       }
       const [createCountries, isCreated] = await Country.findOrCreate({
-        where: {id: paises.id,},
-        defaults:{
+        where: { id: paises.id, },
+        defaults: {
           id: paises.id,
-        name: paises.name,
-        flag: paises.flag,
-        continent: paises.continent[0],
-        capital: cap,
-        subregion: paises.subregion,
-        area: paises.area,
-        population: paises.population
+          name: paises.name,
+          flag: paises.flag,
+          continent: paises.continent[0],
+          capital: cap,
+          subregion: paises.subregion,
+          area: paises.area,
+          population: paises.population
         }
       })
       console.log(isCreated)
@@ -68,8 +69,8 @@ const hereWeGo = async () => {
 
 // Syncing all the models at once.
 conn.sync().then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+  server.listen(PORT, () => {
+    console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
     hereWeGo()
   });
 });
