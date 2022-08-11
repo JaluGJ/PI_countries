@@ -1,5 +1,5 @@
 import axios from "axios"
-const BACK_API = 'https://picountries-production.up.railway.app'
+const BACK_API = 'https://lets-travel-back-api.herokuapp.com'
 /* const {BACK_API} = process.env */
 //----pedidos del get----
 export async function generalCountries (){
